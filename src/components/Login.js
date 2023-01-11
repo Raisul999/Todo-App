@@ -90,7 +90,7 @@ const Login = () => {
                     });
                 }
             } catch (err) {
-                alert(err.message);
+                toast.error(err.response.data.message);
             }
 
 
