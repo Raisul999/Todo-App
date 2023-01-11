@@ -5,6 +5,8 @@ import { Typography, CircularProgress } from '@mui/material'
 import { useAuthUser } from 'react-auth-kit'
 import { Grid } from '@mui/material'
 import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify'
+
 const Home = () => {
 
   const auth = useAuthUser()
@@ -39,7 +41,7 @@ const Home = () => {
       setTasks(res.data)
       setLoading(false)
     } catch (err) {
-      alert('Error: ' + err.message)
+      toast.error(err.response.data.message)
     }
 
 
@@ -118,6 +120,7 @@ const Home = () => {
           </Typography>
         </div>
       }
+      <ToastContainer/>
     </>
   )
 }

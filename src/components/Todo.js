@@ -63,7 +63,7 @@ const Todo = ({ filter, handleFilter, getTodos }) => {
                                 toast.success("Task added sucessfully")
                                 getTodos()
                         } catch (err) {
-                                alert(err.message);
+                                toast.error(err.response.data.message)
                         }
 
 

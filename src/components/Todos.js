@@ -100,7 +100,7 @@ const Todos = ({ task, getTodos }) => {
                         handleClose()
                         getTodos()
                 } catch (err) {
-                        alert("Error: " + err.message);
+                        toast.error(err.response.data.message)
                 }
 
         };
@@ -139,7 +139,7 @@ const Todos = ({ task, getTodos }) => {
                                 handleCloseEdit();
                                 getTodos()
                         } catch (err) {
-                                alert(err.message);
+                                toast.error(err.response.data.message)
                         }
 
 
@@ -164,7 +164,7 @@ const Todos = ({ task, getTodos }) => {
                         handleCloseEdit();
 
                 } catch (err) {
-                        alert(err.message);
+                        toast.error(err.response.data.message)
                 }
 
 

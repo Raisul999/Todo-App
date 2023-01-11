@@ -1,13 +1,13 @@
 import React from 'react'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
-import { Grid, Button } from '@mui/material'
+import { Grid, Button, CircularProgress } from '@mui/material'
 import { jsPDF } from 'jspdf'
 import html2canvas from 'html2canvas'
 
 
 
-const PieChart = ({ data }) => {
+const PieChart = ({ data, tasks }) => {
 
 
         ChartJS.register(ArcElement, Tooltip, Legend);
@@ -35,14 +35,18 @@ const PieChart = ({ data }) => {
                                         Download Chart
                                 </Button>
                         </div>
-                        <Grid container justifyContent='center' alignItems='center'>
+                        {tasks.length ?  <Grid container justifyContent='center' alignItems='center'>
                                 <Grid item>
                                         <Pie data={data}
                                                 style={{ align: 'center' }}
                                                 id='chart'
                                         />
                                 </Grid>
-                        </Grid>
+                        </Grid>:<Grid container justifyContent='center' alignItems='center'>
+                                <Grid item>
+                                       <CircularProgress/>
+                                </Grid>
+                        </Grid> }
                 </>
         )
 }

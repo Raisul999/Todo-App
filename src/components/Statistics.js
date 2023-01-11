@@ -4,6 +4,7 @@ import { useAuthUser } from 'react-auth-kit'
 import PieChart from './PieChart'
 import TaskTable from './TaskTable'
 import moment from 'moment'
+import { ToastContainer, toast } from "react-toastify"
 
 const Statistics = () => {
 
@@ -31,7 +32,7 @@ const Statistics = () => {
       // console.log(res.data)
       setTasks(res.data)
     } catch (err) {
-      alert('Error: ' + err.message)
+      toast.error(err.response.data.message)
     }
 
 
@@ -65,9 +66,9 @@ const Statistics = () => {
     setQuery(e.target.value)
   }
 
-  let ongPercentage = Math.floor((ongoing / tasks.length) * 100)
-  let comPercentage = Math.floor((completed / tasks.length) * 100)
-  let failPercentage = Math.floor((failed / tasks.length) * 100)
+  let ongPercentage = tasks.length ? Math.floor((ongoing / tasks.length) * 100) : '0'
+  let comPercentage = tasks.length ? Math.floor((completed / tasks.length) * 100) : '0'
+  let failPercentage = tasks.length ? Math.floor((failed / tasks.length) * 100) : '0'
 
 
   const data = {
@@ -97,6 +98,7 @@ const Statistics = () => {
     <div>
       <PieChart
         data={data}
+        tasks={tasks}
       />
       <TaskTable
         query={query}
@@ -104,6 +106,7 @@ const Statistics = () => {
         handleSearch={handleSearch}
         handleQuery={handleQuery}
       />
+      <ToastContainer/>
     </div>
   )
 }
