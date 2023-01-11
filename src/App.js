@@ -6,7 +6,6 @@ import Header from './components/Header';
 import Errror from './components/Errror';
 import { Routes, Route } from "react-router-dom"
 import { RequireAuth } from 'react-auth-kit'
-import { ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Box, CircularProgress } from '@mui/material';
 
@@ -14,22 +13,10 @@ const Statistics = lazy(() => import('./components/Statistics'))
 
 const App = () => {
 
-  // const darkTheme = createTheme({
-  //   palette: {
-  //     mode: 'light',
-  //     action: {
-  //       hover: '#fff'
-  //     }
-  //   },
-  // });
-
-  let theme = createTheme()
-
-  theme = responsiveFontSizes(theme)
-
+  
   return (
 
-    <ThemeProvider theme={theme} >
+    
       <Box sx={{ bgcolor: '#fafafa' }}
       >
         <CssBaseline />
@@ -50,8 +37,7 @@ const App = () => {
           </Routes>
         </Suspense>
       </Box>
-    </ThemeProvider>
-
+    
 
 
   );

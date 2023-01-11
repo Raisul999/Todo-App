@@ -1,7 +1,7 @@
-import { useState} from "react";
+import { useState } from "react";
 import axios from "axios";
 import moment from "moment";
-import {Card,CardContent,Typography,Chip, Checkbox, Grid, Button,TextField,MenuItem, Divider, Dialog,DialogActions,DialogContent,DialogTitle,Container,} from "@mui/material";
+import { Card, CardContent, Typography, Chip, Checkbox, Grid, Button, TextField, MenuItem, Divider, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import IconButton from "@mui/material/IconButton";
@@ -11,11 +11,17 @@ import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { useAuthUser } from 'react-auth-kit'
+import { ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material/styles';
 
 const Todos = ({ task, getTodos }) => {
-       
+
         const auth = useAuthUser()
-       
+
+        let theme = createTheme()
+
+        theme = responsiveFontSizes(theme)
+
+
         const styles = {
                 card: {
                         margin: "3rem 0",
@@ -33,6 +39,9 @@ const Todos = ({ task, getTodos }) => {
                         justifyContent: "flex-start",
                         alignItems: "flex-start",
                 },
+                desc: {
+                        marginTop: ".4rem"
+                },
                 content: {
                         display: "flex",
                         justifyContent: "flex-start",
@@ -42,6 +51,7 @@ const Todos = ({ task, getTodos }) => {
                         display: "flex",
                         justifyContent: "flex-end",
                         gap: ".5rem",
+                        marginTop: "1rem"
                 },
         };
 
@@ -57,7 +67,7 @@ const Todos = ({ task, getTodos }) => {
 
 
         let today = new Date();
-       
+
         const handleChangeCheck = (event) => {
                 setChecked(event.target.checked);
         };
@@ -96,7 +106,7 @@ const Todos = ({ task, getTodos }) => {
         };
 
         const updateTask = async (id) => {
-               
+
                 if (title === "") {
                         toast.error("Please enter a title");
                         return;
@@ -113,9 +123,9 @@ const Todos = ({ task, getTodos }) => {
                         toast.error("Please select deadline at least one day above current date");
                         return;
                 } else {
-                        
+
                         let task = { title, description, priority };
-                        
+
                         try {
                                 const config = {
                                         headers: {
@@ -138,7 +148,7 @@ const Todos = ({ task, getTodos }) => {
         }
 
         const completeTask = async (id) => {
-              
+
                 let isComplete = !checked
                 let task = { isComplete };
 
@@ -150,7 +160,7 @@ const Todos = ({ task, getTodos }) => {
                                 }
                         }
                         const res = await axios.post(`${process.env.REACT_APP_API_URL}api/todo/${id}`, task, config)
-                        
+
                         handleCloseEdit();
 
                 } catch (err) {
@@ -164,32 +174,35 @@ const Todos = ({ task, getTodos }) => {
 
         return (
                 <div>
-                        <Container >
+                        <ThemeProvider theme={theme}>
+
                                 <Card style={styles.card}>
                                         <CardContent>
                                                 <div style={styles.header}>
                                                         <Typography variant="h5">{task.title}</Typography>
 
                                                         {
-                                                                (task.priority=='High'&&<Chip label={task.priority} color="error" variant="info" />)||
-                                                                (task.priority=='Medium'&&<Chip label={task.priority} color="warning" variant="filled" />)||
-                                                                (task.priority=='Low'&&<Chip label={task.priority} color="primary" variant="filled" />)
+                                                                (task.priority == 'High' && <Chip label={task.priority} color="error" variant="info" />) ||
+                                                                (task.priority == 'Medium' && <Chip label={task.priority} color="warning" variant="filled" />) ||
+                                                                (task.priority == 'Low' && <Chip label={task.priority} color="primary" variant="filled" />)
                                                         }
                                                 </div>
                                                 <div style={styles.checkbox}>
-                                                        <Checkbox
-                                                                checked={checked}
-                                                                onChange={handleChangeCheck}
-                                                                inputProps={{ "aria-label": "controlled" }}
-                                                                onClick={()=>completeTask(task._id)}
-                                                                disabled={new Date()>new Date(task.deadline)}
-                                                        />
                                                         <div>
+                                                                <Checkbox
+                                                                        checked={checked}
+                                                                        onChange={handleChangeCheck}
+                                                                        inputProps={{ "aria-label": "controlled" }}
+                                                                        onClick={() => completeTask(task._id)}
+                                                                        disabled={new Date() > new Date(task.deadline)}
+                                                                />
+                                                        </div>
+                                                        <div style={styles.desc}>
                                                                 <Typography variant="h6" style={{ textDecoration: checked ? "line-through" : "" }} >{task.description}</Typography>
                                                         </div>
                                                 </div>
                                                 <div style={styles.content}>
-                                                        <span style={{color:"red", fontWeight:"bold"}}>Task Due At:</span> <span style={{color:"black", fontWeight:"bold"}}>{moment(task.deadline).format("MMMM Do YYYY")}</span>
+                                                        <span style={{ color: "red", fontWeight: "bold" }}>Due Date:</span> <span style={{ color: "black", fontWeight: "bold" }}>{moment(task.deadline).format("MMMM Do YYYY")}</span>
                                                 </div>
                                                 <div style={styles.btn}>
                                                         <Button
@@ -199,7 +212,7 @@ const Todos = ({ task, getTodos }) => {
                                                         >
                                                                 <DeleteIcon />
                                                         </Button>
-                                                        <Button variant="outlined" onClick={handleClickOpenEdit} disabled={new Date()>new Date(task.deadline)}>
+                                                        <Button variant="outlined" onClick={handleClickOpenEdit} disabled={new Date() > new Date(task.deadline)}>
                                                                 <EditIcon />
                                                         </Button>
                                                 </div>
@@ -213,14 +226,14 @@ const Todos = ({ task, getTodos }) => {
                                         disableEscapeKeyDown={true}
                                 >
                                         <DialogTitle>Update Task</DialogTitle>
-                                        <Divider/>
+                                        <Divider />
                                         <DialogContent>
-                                        <IconButton
-                                        style={{ position: "absolute", top: "0", right: "0" }}
-                                        onClick={() => setOpenEdit(false)}
-                                        >
-                                        <CloseIcon />
-                                </IconButton>
+                                                <IconButton
+                                                        style={{ position: "absolute", top: "0", right: "0" }}
+                                                        onClick={() => setOpenEdit(false)}
+                                                >
+                                                        <CloseIcon />
+                                                </IconButton>
                                                 <Grid
                                                         container
                                                         spacing={3}
@@ -322,7 +335,8 @@ const Todos = ({ task, getTodos }) => {
                                         </DialogActions>
                                 </Dialog>
                                 <ToastContainer />
-                        </Container>
+
+                        </ThemeProvider>
                 </div>
         );
 };
