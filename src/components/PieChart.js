@@ -14,10 +14,10 @@ const PieChart = ({ data }) => {
 
         const downloadChart = () => {
                 const input = document.getElementById('chart')
-                console.log(input)
+                // console.log(input)
                 html2canvas(input).then((canvas) => {
                         const imgData = canvas.toDataURL('image/png')
-                        console.log(imgData)
+                        // console.log(imgData)
                         const pdf = new jsPDF('p', 'pt', 'a4')
                         pdf.addImage(imgData, 'JPEG', 20, 20)
                         pdf.save('Piechart.pdf')

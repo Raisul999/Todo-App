@@ -29,8 +29,6 @@ const Login = () => {
     };
 
 
-    console.log(credentials);
-
     const handleCredentials = (e) => {
 
         const { value, name } = e.target;
@@ -72,7 +70,7 @@ const Login = () => {
                     password
                 })
 
-                console.log(res);
+                // console.log(res);
                 if (res.data.email) {
                     signIn(
                         {

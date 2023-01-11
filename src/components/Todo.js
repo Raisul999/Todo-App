@@ -47,7 +47,7 @@ const Todo = ({ filter, handleFilter, getTodos }) => {
                         return
                 }
                 else {
-                        console.log("To do data added succesfully");
+                        // console.log("To do data added succesfully");
                         let task = { title, description, priority, deadline }
                         try {
                                 const config = {

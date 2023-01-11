@@ -85,7 +85,7 @@ const Todos = ({ task, getTodos }) => {
                         },
                 };
                 try {
-                        console.log("deleteTask", id);
+                        // console.log("deleteTask", id);
                         const res = await axios.delete(`${process.env.REACT_APP_API_URL}api/todo/${id}`, config)
                         handleClose()
                         getTodos()
@@ -124,7 +124,7 @@ const Todos = ({ task, getTodos }) => {
                                         }
                                 }
                                 const res = await axios.put(`${process.env.REACT_APP_API_URL}api/todo/${id}`, task, config)
-                                console.log(res);
+                                // console.log(res);
                                 toast.success("Task updated successfully");
                                 handleCloseEdit();
                                 getTodos()
