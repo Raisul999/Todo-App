@@ -83,59 +83,21 @@ const Signup = () => {
                 })
 
                 console.log(res);
-                navigate ('/login')
-                // if(res.data.email){
-                //     signIn(
-                //         {
-                //             token: res.data.token,
-                //             expiresIn:3600,
-                //             tokenType: "Bearer",
-                //             authState: res.data,
-                            
-                //         }
-                //     )
-                //     console.log('success')
-                //     navigate ('/')
-                //     console.log('after navigate')
-                // }else {
-                //     toast.error('Invalid redentials', {
-                //         position: "top-center",
-                //     });
-                // }
+              
             } catch (err) {
                  alert(err.message);
             }
-            // console.log("data added succesfully");
-            // history("/login")
-            // localStorage.setItem("usertodo",JSON.stringify([...data,inpval]));
-
         }
 
     }
 
-
-    // const [name, setName] = useState("");
-    // const [email, setEmail] = useState("");
-    // const [password, setPassword] = useState("");
-    // const [confirmPassword,  setConfirmPassword] = useState("");
-   
-    // const RegisterHandler = async () => {
-
-    //  const response= await axios.post('https://1534-103-62-140-118.in.ngrok.io/api/user/register',{
-    //         name,
-    //         email,
-    //         password
-    //         })
-       
-    //         console.log(response);
-    //  };
 
 
     const paperStyle = { padding: '30px 20px', width: 300, margin: "20px auto" }
     const headerStyle = { margin: 0 }
     const avatarStyle = { backgroundColor: '#1bbd7e' }
     const marginStyle = { marginTop: 10 }
-   // console.log(name);
+   
     return (
         <Grid>
             <Paper elevation={20} style={paperStyle}>

@@ -146,11 +146,6 @@ const Login = () => {
                     />
                 </FormControl>
                 <Button type='submit' onClick={login} color='primary' variant="contained" style={btnstyle} fullWidth>Sign in</Button>
-                <Typography >
-                    <Link href="#" >
-                        Forgot password ?
-                    </Link>
-                </Typography>
                 <Typography > Don't have an account ?
                     <Link href="/Signup" >
                         Sign Up
