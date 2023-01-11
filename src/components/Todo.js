@@ -60,6 +60,7 @@ const Todo = ({ filter, handleFilter, getTodos }) => {
                                 const res = await axios.post(`${process.env.REACT_APP_API_URL}api/todo`, task, config)
 
                                 handleClose()
+                                toast.success("Task added sucessfully")
                                 getTodos()
                         } catch (err) {
                                 alert(err.message);
