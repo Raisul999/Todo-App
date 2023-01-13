@@ -3,6 +3,8 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Header from './components/Header';
+import ForgetPass from './components/ForgetPass';
+import ChangePass from './components/ChangePass';
 import Errror from './components/Errror';
 import { Routes, Route } from "react-router-dom"
 import { RequireAuth } from 'react-auth-kit'
@@ -30,6 +32,8 @@ const App = () => {
             </RequireAuth>} />
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<Signup />} />
+            <Route path='/forgetpass' element={<ForgetPass />} />
+            <Route path='/changepass' element={<ChangePass />} />
             <Route path='/stats' element={<RequireAuth loginPath='/login'>
               <Statistics />
             </RequireAuth>} />
