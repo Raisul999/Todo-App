@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useSignIn } from 'react-auth-kit';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-
+import LoadingButton from '@mui/lab/LoadingButton';
 
 const Login = () => {
 
@@ -19,7 +19,8 @@ const Login = () => {
         email: "",
         password: ""
     })
-
+    const [loading, setLoading] = useState(false);
+    
     const [showPassword, setShowPassword] = useState(false);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -41,7 +42,9 @@ const Login = () => {
         })
 
     }
-
+    // function handleClick() {
+    //     setLoading(true);
+    //   }
     const login = async (e) => {
         e.preventDefault();
 
@@ -63,7 +66,7 @@ const Login = () => {
                 position: "top-center",
             });
         } else {
-
+            setLoading(true);
             try {
                 const res = await axios.post(`${process.env.REACT_APP_API_URL}api/user/login`, {
                     email,
@@ -81,7 +84,7 @@ const Login = () => {
 
                         }
                     )
-
+         
                     navigate('/')
                     
                 } else {
@@ -89,7 +92,9 @@ const Login = () => {
                         position: "top-center",
                     });
                 }
+                setLoading(false);
             } catch (err) {
+                setLoading(false);
                 toast.error(err.response.data.message);
             }
 
@@ -143,7 +148,19 @@ const Login = () => {
                         onChange={handleCredentials}
                     />
                 </FormControl>
-                <Button type='submit' onClick={login} color='primary' variant="contained" style={btnstyle} fullWidth>Sign in</Button>
+                {/* <Button type='submit' onClick={login} color='primary' variant="contained" loading={loading} loadingIndicator="Loading…" style={btnstyle} fullWidth>Sign in</Button> */}
+
+                <LoadingButton
+         
+        onClick={login}
+        loading={loading}
+        loadingPosition="start"
+          variant="contained"
+          color='primary'
+          style={btnstyle} fullWidth
+        >
+          <span>Sign in</span>
+        </LoadingButton>
                 <Typography >
                     <Link href="/ForgetPass" >
                         Forgot password ?
