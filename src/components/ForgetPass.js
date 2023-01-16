@@ -31,13 +31,8 @@ function ForgetPass() {
     const forgetPassHandler = async (e) => {
         e.preventDefault();
 
-        const { name, email,} = forgetPassCred;
-
-        if (name === "") {
-            toast.error(' name field is requred!', {
-                position: "top-center",
-            });
-        } else if (email === "") {
+        const {email} = forgetPassCred;
+         if (email === "") {
             toast.error('email field is requred', {
                 position: "top-center",
             });
@@ -46,21 +41,6 @@ function ForgetPass() {
                 position: "top-center",
             });
         }
-
-        // else if (password === "") {
-        //     toast.error('password field is requred', {
-        //         position: "top-center",
-        //     });
-        // } else if (password.length < 5) {
-        //     toast.error('password length greater five', {
-        //         position: "top-center",
-        //     });
-        // }
-        // else if (password !== confirmPassword) {
-        //     toast.error('password do not match', {
-        //         position: "top-center",
-        //     });
-        // }
         else {
 
 
@@ -87,7 +67,6 @@ function ForgetPass() {
 
     }
     const paperStyle = { padding: '30px 20px', width: 350, margin: "20px auto" }
-    const headerStyle = { margin: 0 }
     const avatarStyle = { backgroundColor: '#1bbd7e' }
     const marginStyle = { marginTop: 10 }
   return (
@@ -97,7 +76,6 @@ function ForgetPass() {
             <Avatar style={avatarStyle}>
                 <AddCircleOutlineOutlinedIcon />
             </Avatar>
-            {/* <h2 style={headerStyle}>Forgot your Password?</h2> */}
             <Typography variant='caption' gutterBottom>Please add your email address to verify email </Typography>
         </Grid>
         <form>

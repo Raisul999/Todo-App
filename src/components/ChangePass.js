@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Grid, Paper, Avatar, Typography, TextField, Button } from '@mui/material'
+import { Grid, Paper, Avatar,TextField, Button } from '@mui/material'
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
@@ -35,11 +35,7 @@ function ForgetPass() {
 
         const { name, email, password, confirmPassword } = changePassCred;
 
-        if (name === "") {
-            toast.error(' name field is requred!', {
-                position: "top-center",
-            });
-        } else if (email === "") {
+        if (email === "") {
             toast.error('email field is requred', {
                 position: "top-center",
             });
@@ -100,7 +96,6 @@ function ForgetPass() {
                 <AddCircleOutlineOutlinedIcon />
             </Avatar>
             <h4 style={headerStyle}>Change your Password</h4>
-            {/* <Typography variant='caption' gutterBottom>Please add your email address to verify email </Typography> */}
         </Grid>
         <form>
             <TextField fullWidth label='Email' name='email' placeholder="Enter your email" onChange={getdata} style={marginStyle} />
