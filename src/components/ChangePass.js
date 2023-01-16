@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Grid, Paper, Avatar,TextField, Button } from '@mui/material'
+import { Grid, Paper, Avatar, TextField, Button } from '@mui/material'
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
@@ -33,7 +33,7 @@ function ForgetPass() {
     const changePassHandler = async (e) => {
         e.preventDefault();
 
-        const { name, email, password, confirmPassword } = changePassCred;
+        const { email, password, confirmPassword } = changePassCred;
 
         if (email === "") {
             toast.error('email field is requred', {
@@ -63,14 +63,13 @@ function ForgetPass() {
 
 
             try {
-                const res = await axios.post(`${process.env.REACT_APP_API_URL}api/user/register`, {
-                    name,
+                const res = await axios.post(`${process.env.REACT_APP_API_URL}api/user/set-password`, {
+
                     email,
-                    password,
-                    confirmPassword
+                    password
                 })
 
-                toast.success("Registration successful")
+                toast.success("Password set successfully")
 
                 setTimeout(() => {
                     navigate('/login')
@@ -78,7 +77,7 @@ function ForgetPass() {
                 // console.log(res);
 
             } catch (err) {
-                
+
                 toast.error(err.response.data.message);
             }
         }
@@ -88,25 +87,25 @@ function ForgetPass() {
     const headerStyle = { margin: 0 }
     const avatarStyle = { backgroundColor: '#1bbd7e' }
     const marginStyle = { marginTop: 10 }
-  return (
-    <Grid style={{height:'90vh'}}>
-    <Paper elevation={20} style={paperStyle}>
-        <Grid align='center'>
-            <Avatar style={avatarStyle}>
-                <AddCircleOutlineOutlinedIcon />
-            </Avatar>
-            <h4 style={headerStyle}>Change your Password</h4>
+    return (
+        <Grid style={{ height: '90vh' }}>
+            <Paper elevation={20} style={paperStyle}>
+                <Grid align='center'>
+                    <Avatar style={avatarStyle}>
+                        <AddCircleOutlineOutlinedIcon />
+                    </Avatar>
+                    <h4 style={headerStyle}>Change your Password</h4>
+                </Grid>
+                <form>
+                    <TextField fullWidth label='Email' name='email' placeholder="Enter your email" onChange={getdata} style={marginStyle} />
+                    <TextField type='password' fullWidth label='Password' name='password' placeholder="Enter your password" onChange={getdata} style={marginStyle} />
+                    <TextField type='password' fullWidth label='Confirm Password' name='confirmPassword' placeholder="Confirm your password" onChange={getdata} style={marginStyle} />
+                    <Button fullWidth type='submit' onClick={changePassHandler} variant='contained' color='primary' style={marginStyle}>Change Password</Button>
+                </form>
+            </Paper>
+            <ToastContainer />
         </Grid>
-        <form>
-            <TextField fullWidth label='Email' name='email' placeholder="Enter your email" onChange={getdata} style={marginStyle} />
-            <TextField type='password' fullWidth label='Password' name='password' placeholder="Enter your password" onChange={getdata} style={marginStyle} />
-             <TextField type='password' fullWidth label='Confirm Password' name='confirmPassword' placeholder="Confirm your password" onChange={getdata} style={marginStyle} />
-            <Button fullWidth  type='submit' onClick={changePassHandler} variant='contained' color='primary' style={marginStyle}>Change Password</Button>
-        </form>
-    </Paper>
-    <ToastContainer />
-</Grid>
-  )
+    )
 }
 
 export default ForgetPass

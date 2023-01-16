@@ -44,25 +44,19 @@ function ForgetPass() {
         else {
 
 
-            // try {
-            //     const res = await axios.post(`${process.env.REACT_APP_API_URL}api/user/register`, {
-            //         name,
-            //         email,
-            //         password,
-            //         confirmPassword
-            //     })
+            try {
+                const res = await axios.post(`${process.env.REACT_APP_API_URL}api/user/forgot-password`, {
+                    
+                    email
+                })
 
-            //     toast.success("Registration successful")
+                toast.success("Reset Link sent to your email")
 
-            //     setTimeout(() => {
-            //         navigate('/login')
-            //     }, 1000)
-            //     // console.log(res);
 
-            // } catch (err) {
+            } catch (err) {
                 
-            //     toast.error(err.response.data.message);
-            // }
+                toast.error(err.response.data.message);
+            }
         }
 
     }
