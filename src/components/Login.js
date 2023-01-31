@@ -54,7 +54,7 @@ const Login = () => {
                 position: "top-center",
             });
         } else if (!email.includes("@")) {
-            toast.error('plz enter valid email addres', {
+            toast.error('please enter valid email address', {
                 position: "top-center",
             });
         } else if (password === "") {

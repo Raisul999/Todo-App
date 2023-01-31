@@ -1,4 +1,4 @@
-import React from 'react'
+import {useState} from 'react'
 import {
   AppBar,
   Box,
@@ -14,7 +14,7 @@ import {
 
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
-import { useSignOut } from 'react-auth-kit'
+import { useSignOut, useAuthUser } from 'react-auth-kit'
 import { useNavigate, Link } from 'react-router-dom'
 const pages = [
   {
@@ -35,7 +35,10 @@ function Header() {
     }
   }
 
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null)
+  const auth = useAuthUser()
+
+  
 
 
   const handleOpenNavMenu = (event) => {
@@ -74,7 +77,7 @@ function Header() {
               <Link to='/' style={styles.link}>TODO</Link>
             </Typography>
 
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            {auth()?.token&&<Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -117,7 +120,7 @@ function Header() {
                   </MenuItem>
                 ))}
               </Menu>
-            </Box>
+            </Box>}
             <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
             <Typography
               variant="h5"
@@ -136,7 +139,7 @@ function Header() {
               <Link to='/' style={styles.link}>TODO</Link>
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              {pages.map((page, i) => (
+              {auth()?.token&&pages.map((page, i) => (
                 <Button
                   key={i}
                   onClick={handleCloseNavMenu}
