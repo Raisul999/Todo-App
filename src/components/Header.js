@@ -158,14 +158,14 @@ function Header() {
               ))}
             </Box>
 
-            <Box sx={{ flexGrow: 0 }}>
+            {auth()?.token&&<Box sx={{ flexGrow: 0 }}>
               <Tooltip title="">
                 <Button onClick={handleSignOut} sx={{ p: 1, color: 'white', border: '1px solid white' }}>
                   Logout
                 </Button>
               </Tooltip>
 
-            </Box>
+            </Box>}
           </Toolbar>
         </Container>
       </AppBar>
