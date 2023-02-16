@@ -1,7 +1,7 @@
 import React from 'react'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
-import { Grid, Button, CircularProgress } from '@mui/material'
+import { Grid, Button, CircularProgress, Typography } from '@mui/material'
 import { jsPDF } from 'jspdf'
 import html2canvas from 'html2canvas'
 
@@ -35,18 +35,20 @@ const PieChart = ({ data, tasks }) => {
                                         Download Chart
                                 </Button>
                         </div>
-                        {tasks.length ?  <Grid container justifyContent='center' alignItems='center'>
+                        {tasks.length ? <Grid container justifyContent='center' alignItems='center'>
                                 <Grid item>
                                         <Pie data={data}
                                                 style={{ align: 'center' }}
                                                 id='chart'
                                         />
                                 </Grid>
-                        </Grid>:<Grid container justifyContent='center' alignItems='center'>
+                        </Grid> : <Grid container justifyContent='center' alignItems='center'>
                                 <Grid item>
-                                       <CircularProgress/>
+                                        {tasks.length > 0 ? <CircularProgress /> : <Typography variant='h5'>
+                                                No Post Statistics
+                                        </Typography>}
                                 </Grid>
-                        </Grid> }
+                        </Grid>}
                 </>
         )
 }
